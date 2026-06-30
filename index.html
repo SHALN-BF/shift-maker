@@ -1,29 +1,132 @@
-フィラメント切れ<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>シフト文 自動生成</title>
   <style>
-    body { font-family: sans-serif; max-width: 960px; margin: 24px auto; padding: 0 16px 32px; line-height: 1.6; background: #f7f7f7; color: #222; }
-    h1 { font-size: 24px; margin-bottom: 8px; }
-    .desc { color: #555; margin-bottom: 20px; }
-    .card { background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-    .row { display: grid; grid-template-columns: 80px 160px 1fr 1fr 110px; gap: 12px; align-items: center; }
-    @media (max-width: 720px) { .row { grid-template-columns: 1fr; } }
-    label { font-weight: bold; }
-    input[type="date"], select, button { font-size: 16px; padding: 8px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
-    select, input[type="date"] { width: 100%; }
-    .unavailable-btn { padding: 8px 12px; background: #e74c3c; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; white-space: nowrap; }
-    .unavailable-btn.active { background: #999; color: #fff; }
-    .output-box { background: #fff; border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-top: 20px; }
-    textarea { width: 100%; min-height: 260px; resize: vertical; padding: 12px; border-radius: 8px; border: 1px solid #ccc; }
-    .buttons { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
-    button { padding: 10px 16px; border: none; border-radius: 8px; cursor: pointer; background: #2d6cdf; color: white; }
-    button.secondary { background: #666; }
-    .hint { font-size: 13px; color: #666; margin-top: 8px; }
+    body {
+      font-family: sans-serif;
+      max-width: 960px;
+      margin: 24px auto;
+      padding: 0 16px 32px;
+      line-height: 1.6;
+      background: #f7f7f7;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .desc {
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 80px 160px 1fr 1fr 110px;
+      gap: 12px;
+      align-items: center;
+    }
+
+    @media (max-width: 720px) {
+      .row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="date"],
+    select,
+    button {
+      font-size: 16px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    select,
+    input[type="date"] {
+      width: 100%;
+    }
+
+    .unavailable-btn {
+      padding: 8px 12px;
+      background: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .unavailable-btn.active {
+      background: #999;
+      color: #fff;
+    }
+
+    .output-box {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      margin-top: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 260px;
+      resize: vertical;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #2d6cdf;
+      color: white;
+    }
+
+    button.secondary {
+      background: #666;
+    }
+
+    .hint {
+      font-size: 13px;
+      color: #666;
+      margin-top: 8px;
+    }
   </style>
 </head>
+
 <body>
   <h1>シフト文 自動生成</h1>
   <p class="desc">次の週のシフトを自動設定 + Cookie保存 + 出勤不可対応</p>
@@ -65,7 +168,7 @@
       const startHour = isWeekend ? 7 : 10;   // 土日=7時〜　平日=10時〜
       for (let h = startHour; h <= 21; h++) {
         for (let m = 0; m < 60; m += 30) {
-          times.push(`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`);
+          times.push(`${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`);
         }
       }
       return times;
@@ -178,13 +281,13 @@
             }
           }
         });
-      } catch(e) {}
+      } catch (e) { }
     }
 
     function formatDateToJP(dateValue) {
       if (!dateValue) return "";
       const d = new Date(dateValue);
-      return `${d.getMonth()+1}/${d.getDate()}`;
+      return `${d.getMonth() + 1}/${d.getDate()}`;
     }
 
     function updateOutput() {
@@ -240,7 +343,7 @@
     });
 
     function init() {
-      const today = new Date().toISOString().slice(0,10);
+      const today = new Date().toISOString().slice(0, 10);
       baseDateInput.value = today;
       loadFromCookie();
       setNextWeek(today);
@@ -250,4 +353,5 @@
     window.onload = init;
   </script>
 </body>
+
 </html>
